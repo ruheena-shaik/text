@@ -1,0 +1,15 @@
+2025-08-25 17:24:25.490 [info] Extension host with pid 15297 started
+2025-08-25 17:24:25.905 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2025-08-25 17:24:25.978 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2025-08-25 17:24:26.212 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2025-08-25 17:24:26.349 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2025-08-25 17:24:26.483 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2025-08-25 17:24:26.832 [info] Eager extensions activated
+2025-08-25 17:24:26.845 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2025-08-25 17:24:26.855 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2025-08-25 17:24:33.583 [warning] [Decorations] CAPPING events from decorations provider vscode.git 10000
+2025-08-25 17:24:36.610 [warning] [Decorations] CAPPING events from decorations provider vscode.git 10000
+2025-08-25 17:24:53.459 [warning] [Decorations] CAPPING events from decorations provider vscode.git 10001
+2025-08-25 17:25:01.444 [info] ExtensionService#_doActivateExtension vscode.configuration-editing, startup: false, activationEvent: 'onLanguage:jsonc'
+2025-08-25 17:25:01.484 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2025-08-25 17:25:01.686 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'

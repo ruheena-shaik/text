@@ -1,0 +1,4 @@
+2025-08-14 13:16:03.541 [info] update#setState disabled
+2025-08-14 13:16:03.541 [info] update#ctor - updates are disabled as there is no update URL
+2025-08-14 13:20:09.453 [info] Extension host with pid 9524 exited with code: 0, signal: unknown.
+2025-08-14 13:24:37.405 [info] Extension host with pid 9505 exited with code: 0, signal: unknown.

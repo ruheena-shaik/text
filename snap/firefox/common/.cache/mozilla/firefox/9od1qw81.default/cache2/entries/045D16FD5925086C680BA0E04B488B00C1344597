@@ -1,0 +1,347 @@
+var ajaxObject;
+var sourceControl=null;
+var destControl=null;
+var selectIndex=0;
+var suggestList=new Array();
+
+// Make Ajax Object as per browser.
+function getAjaxObject(){
+	try{
+		// create XMLHttpRequest for firefox, safari, opera
+		ajaxObject = new XMLHttpRequest();
+	} 
+	catch(e){
+		try{
+			// create XMLHttpRequest for IE 6.0+
+			ajaxObject = new ActiveXObject('Msxml2.XMLHTTP');
+		}
+		catch(e){
+			try{
+				// create XMLHttpRequest for IE 6.0+
+				ajaxObject = new ActiveXObject('Microsoft.XMLHTTP');
+			}
+			catch(e){
+				Cyberoam.messageBox({message: "Your browser is not supporting AJAX"});
+			}
+		}
+	} 
+	return ajaxObject;
+}
+
+// A Function which invokes an Ajax Request to a URL
+function invokeAjaxURL(url, mode){
+	try { 
+		ajaxObject = getAjaxObject();
+		ajaxObject.open(mode, url, true);
+		ajaxObject.onreadystatechange = processResponse; 
+		ajaxObject.send('');
+	}catch(e){
+		Cyberoam.messageBox({message: "Problem in sending request to Cyberoam Server:" + e});
+	}
+}
+
+function processResponse(){
+	try{
+		if(ajaxObject.readyState == 4){
+			parseXML(ajaxObject.responseXML);
+		}
+	}catch(e){
+		parseXML(null);
+		//alert("Cyberoam Server is not Reachable.Please re-login after Sometime.");
+	}
+}	
+function parseXML(responsexml){
+	Cyberoam.messageBox({message: "invalid function call from cyberoamAjax.js. Please implement the function in your jsp/html file"});
+}
+/*
+ * Returns a function that waits for the specified XMLHttpRequest to complete,
+ * then passes it that XML response to the given handler function.
+ * req - The XMLHttpRequest whose state is changing
+ * responseXmlHandler - Function to pass the XML response to
+ */
+function getReadyStateHandler(req, responseXmlHandler) {
+	try {
+		// Return an anonymous function that listens to the XMLHttpRequest instance
+	  	return function () {
+	    	// If the request is completed successfully.
+	    	if (req.readyState == 4) {       
+	      		// Check whether we have received a successful response from the server
+		      	if (req.status == 200) {
+		        	// Pass the XML payload of the response to the handler function.
+		        	
+		        	responseXmlHandler(req.responseXML);
+		        } else {
+		        	// An HTTP problem has occurred
+		        	Cyberoam.messageBox({message: "Connection to the Authentication Server is lost."});
+					removeOverlay();
+		      	}
+	    	}
+	  	}
+	} catch(e) {
+	}	
+}
+
+/*
+ * This function initialize the Ajax Autocomplete control.
+ * Source is the control based on its value the request would be made.
+ * Dest is the control on which suggestions would be listed.
+ */ 
+function initialize(source) {
+	sourceControl = document.getElementById(source);
+	destControl = document.createElement("DIV");	
+	setStyle(destControl);	
+    document.body.appendChild(destControl);
+    clearSuggestList();
+    if(sourceControl.addEventListener){
+    	sourceControl.addEventListener('blur',clearSuggestList,false);
+    } else {
+    	sourceControl.attachEvent('onblur',clearSuggestList);
+    }
+}
+function dyn_init(source,dest) {
+	sourceControl = source;
+	destControl = dest;
+	setStyle(destControl);	
+    clearSuggestList();
+    if(sourceControl.addEventListener){
+    	sourceControl.addEventListener('blur',clearSuggestList,false);
+    } else {
+    	sourceControl.attachEvent('onblur',clearSuggestList);
+    }
+}
+function setStyle(dest) {
+	dest.style.backgroundColor = "#FFFFFF";
+	dest.style.textAlign = "left"; 
+	dest.style.border = "1px";
+	dest.style.borderStyle = "solid"
+	dest.style.borderColor = "#000000";
+	dest.style.display = "none";
+	dest.style.position = "absolute";
+	dest.style.zIndex="1"
+    dest.style.top = (getElementHeight(sourceControl) + getElementTop(sourceControl)) + "px";
+    dest.style.left = getElementLeft(sourceControl) + "px";
+    dest.style.width = "300px";
+}
+
+function makeAjaxRequest(method, queryString, url, event, requestHandlerMethod) {
+	var keynum;
+	if(window.event) {
+		keynum = event.keyCode;
+	} else if(event.which) {
+		keynum = event.which;
+	}
+	if(keynum == 9) {
+			sourceControl.blur();
+			return true;
+	}
+	if (keynum != 40 && keynum != 38 && keynum != 13 && keynum != 27) {
+		if (sourceControl.value == "") {
+	        clearSuggestList();
+	    } else {
+			var req = getAjaxObject();
+			var fieldValue = sourceControl.value;
+			req.onreadystatechange = getReadyStateHandler(req, requestHandlerMethod);
+			req.open(method,url,true);
+			req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");	 
+			req.send(queryString);
+		}
+	}
+}
+
+function isNavigation(event) {
+	var keynum;
+	if(window.event) {
+		keynum = event.keyCode;
+	} else if(event.which) {
+		keynum = event.which;
+	}
+	if (keynum != 40 && keynum != 38 && keynum != 13 && keynum != 9) {		
+		return true;
+	}
+	return false;
+}
+function addItemToList(index, itemList, setIndex) {
+	var elementId;		
+	var alignment = "left";
+	suggestList = itemList;
+	selectIndex = setIndex;
+	var division = Math.ceil(100/suggestList.length);
+	var suggest = '<table onmouseover="javascript:suggestOver(' + index + ', this);" ';
+	suggest += 'onmouseout="javascript:suggestOut();" ';
+	suggest += 'onclick="javascript:setSourceValue(' + index + ', this.innerHTML); ';
+	suggest += 'javascript:clearSuggestList();" class="suggest_link" width="100%"><tr>'; 
+	for(i=0;i<suggestList.length;i++) {
+		if(i==selectIndex) {
+			elementId = index;
+			alignment = "left";
+		} else {
+			elementId = suggestList[i]+index;
+			alignment = "right";
+		}
+		suggest += '<td id="ele' + elementId + '" align="' + alignment + '" width="' + division + '%"  style="font-size:12px">' + suggestList[i] + '</td>';
+	}
+	suggest += '</tr></table>';
+	destControl.innerHTML += suggest;
+}
+function getElementTop(element){
+	var targetTop = 0;
+	if (element.offsetParent) {
+		while (element.offsetParent) {
+			targetTop += element.offsetTop;
+            element = element.offsetParent;
+		}
+	} else if (element.y) {
+		targetTop += element.y;
+    }
+	return targetTop;
+}	
+
+function getElementLeft(element){
+	var targetLeft = 0;
+	if (element.offsetParent) {
+		while (element.offsetParent) {
+			targetLeft += element.offsetLeft;
+            element = element.offsetParent;
+		}
+	} else if (element.x) {
+		targetLeft += element.x;
+    }
+	return targetLeft;
+}
+
+function getElementHeight(element){
+	var targetHeight = 0;
+	if (element.offsetParent) {
+		targetHeight += element.offsetHeight;
+	}
+	return targetHeight;
+}
+
+function getElementWidth(element){
+	var targetWidth = 0;
+	if (element.offsetParent) {
+		targetWidth += element.offsetWidth;
+	}
+	return targetWidth;
+}
+
+function clearSuggestList() {
+    destControl.innerHTML = '';
+    hideList();
+}
+
+function hideList() {
+	destControl.style.display = 'none';
+}
+
+function showList() {
+	destControl.style.display = '';
+}
+
+function getCursor() {
+	if (destControl.innerHTML.length == 0) {
+		return -1;
+	}
+	var parent = destControl;
+	for(var i = 0; i < parent.childNodes.length; i++) {
+		if(parent.childNodes[i].className == "suggest_link_over") {
+			return i;
+		}
+	}
+	return parent.childNodes.length;
+}
+
+function handleArrowKeys(event) {
+	var keynum;
+	var cursor;
+	var parent;
+	if(window.event) {
+		keynum = event.keyCode;
+	} else if(event.which) {
+		keynum = event.which;
+	}	
+	if(keynum == 13 || keynum == 9 || keynum == 27) {
+		clearSuggestList();
+		return false;
+	} else {
+		if(sourceControl.value != '' && (keynum == 40 || keynum == 38)) {
+			cursor = getCursor();
+			parent = destControl;
+			if (keynum == 40) {
+				if (cursor == parent.childNodes.length) {
+					suggestOver(0, parent.childNodes[0]);
+				} else if (cursor < parent.childNodes.length - 1) {
+					suggestOut();
+					suggestOver(cursor + 1, parent.childNodes[cursor + 1]);
+				}
+			} else {
+				if (cursor > 0) {
+					suggestOut();
+					suggestOver(cursor - 1, parent.childNodes[cursor - 1]);
+				}
+			}
+		}
+	}
+	return true;
+}
+
+function suggestOver(index, div_value) {
+	div_value.className = 'suggest_link_over';
+	setSourceValue(index);
+}
+
+function suggestOut() {
+	var parent = destControl;
+	for(i=0;i<parent.childNodes.length;i++) {
+		parent.childNodes[i].className = 'suggest_link';
+	}
+}
+
+function setSourceValue(index) {
+	var selectedVal = document.getElementById('ele'+index);
+	sourceControl.value = selectedVal.innerHTML;
+}
+
+
+/*.........These functions are for SXP Portal.................................................*/ 
+function makeAjaxRequest2(method, queryString, url, requestHandlerMethod) {                            
+	var req = getAjaxObject();                                                                     
+	req.onreadystatechange = getReadyStateHandler2(req, requestHandlerMethod);                      
+	req.open(method,url,true);                                                                      
+	req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");                      
+	req.send(queryString);                                                                          
+}                                                                                                       
+
+function getReadyStateHandler2(req, responseXmlHandler) {                                               
+	try {                                                                                           
+		// Return an anonymous function that listens to the XMLHttpRequest instance             
+		return function () {                                                                    
+			// If the request is completed successfully.                                    
+			if (req.readyState == 4) {                                                      
+				// Check whether we have received a successful response from the server 
+				if (req.status == 200) {                                                
+					// Pass the XML payload of the response to the handler function.
+					responseXmlHandler(req.response);       
+				} else {                                        
+					// An HTTP problem has occurred         
+					consol.log("Status code - "+req.status);
+				}                                            
+			}                                                    
+		}                                                            
+	} catch(e) {                                                         
+		consol.error("Issue in getReadyStateHandler2 function - "+e);
+	}                                                       
+}                                   
+/*............................................................................................*/   
+
+§˜Â0      h¬Dyh¬DyHŽÃ•h­‹   s    O^partitionKey=%28https%2Ckluniversity.in%29,:https://captiveportal.kluniversity.in:8090/javascript/cyberoamAjax.js strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Content-Type: application/javascript
+Content-Length: 10433
+Expires: Tue, 26 Aug 2025 10:22:59 GMT
+Via: HTTPS/1.1 forward.http.proxy:3128
+ original-response-headers Content-Type: application/javascript
+Content-Length: 10433
+Expires: Tue, 26 Aug 2025 10:22:59 GMT
+Via: HTTPS/1.1 forward.http.proxy:3128
+Connection: keep-alive
+ ctid 2 uncompressed-len 0 net-response-time-onstart 20 net-response-time-onstop 20   (Á

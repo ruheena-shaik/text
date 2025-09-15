@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="file:///home/ruheena-shaik/hello.txt" added="2025-07-31T07:35:57.157208Z" modified="2025-08-06T09:48:29.556001Z" visited="2025-07-31T07:35:57.157209Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2025-08-06T09:48:29.555998Z" count="9"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ruheena-shaik/Downloads/Telegram%20Desktop/Linuxppt.pdf" added="2025-08-04T10:28:00.454973Z" modified="2025-08-04T10:43:54.287469Z" visited="2025-08-04T10:28:00.454974Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/pdf"/>
+        <bookmark:applications>
+          <bookmark:application name="Document Viewer" exec="&apos;evince %u&apos;" modified="2025-08-04T10:43:54.287466Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ruheena-shaik/Downloads/Linuxppt.pdf" added="2025-08-04T10:59:34.629699Z" modified="2025-08-04T10:59:34.880119Z" visited="2025-08-04T10:59:34.629700Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/octet-stream"/>
+        <bookmark:applications>
+          <bookmark:application name="xdg-desktop-portal-gnome" exec="&apos;xdg-desktop-portal-gnome %u&apos;" modified="2025-08-04T10:59:34.629703Z" count="1"/>
+          <bookmark:application name="snap.telegram-desktop" exec="&apos;gio open %u&apos;" modified="2025-08-04T10:59:34.880114Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ruheena-shaik/Documents/helloworld" added="2025-08-06T09:50:35.598211Z" modified="2025-08-11T10:33:07.092614Z" visited="2025-08-06T09:50:35.598212Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2025-08-06T10:09:16.898153Z" count="5"/>
+          <bookmark:application name="org.gnome.Nautilus" exec="&apos;gnome-text-editor %U&apos;" modified="2025-08-11T10:33:07.092611Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ruheena-shaik/Documents/helloworld.txt" added="2025-08-11T10:33:32.890577Z" modified="2025-08-11T10:33:32.890592Z" visited="2025-08-11T10:33:32.890578Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:applications>
+          <bookmark:application name="gnome-text-editor" exec="&apos;gnome-text-editor %u&apos;" modified="2025-08-11T10:33:32.890585Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ruheena-shaik/helloworld.txt" added="2025-08-11T10:38:54.394740Z" modified="2025-08-11T10:39:07.236885Z" visited="2025-08-11T10:38:54.394742Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2025-08-11T10:39:07.236881Z" count="3"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ruheena-shaik/Documents/hi.txt" added="2025-08-25T11:26:13.722889Z" modified="2025-08-25T11:36:44.281634Z" visited="2025-08-25T11:26:13.722890Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:applications>
+          <bookmark:application name="code" exec="&apos;code %u&apos;" modified="2025-08-25T11:36:44.281631Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ruheena-shaik/Downloads/git.txt" added="2025-08-25T11:37:55.352802Z" modified="2025-08-25T11:37:55.352811Z" visited="2025-08-25T11:37:55.352804Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:applications>
+          <bookmark:application name="code" exec="&apos;code %u&apos;" modified="2025-08-25T11:37:55.352806Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>

@@ -1,0 +1,68 @@
+{
+  "Version": "24.04",
+  "OEM": {
+    "Vendor": "Dell Inc.",
+    "Product": "Inspiron 15 3520",
+    "Family": "Inspiron"
+  },
+  "BIOS": {
+    "Vendor": "Dell Inc.",
+    "Version": "1.30.0"
+  },
+  "Arch": "amd64",
+  "HwCap": "x86-64-v3",
+  "GPU": [
+    {
+      "Vendor": "8086",
+      "Model": "4628"
+    }
+  ],
+  "RAM": 7.8,
+  "Partitions": [
+    32.8,
+    0.4
+  ],
+  "Screens": [
+    {
+      "Size": "340mmx190mm",
+      "Resolution": "1920x1080",
+      "Frequency": "120.17"
+    }
+  ],
+  "Autologin": false,
+  "LivePatch": false,
+  "Session": {
+    "DE": "ubuntu:GNOME",
+    "Name": "ubuntu",
+    "Type": "wayland"
+  },
+  "Language": "en_US",
+  "Timezone": "Asia/Kolkata",
+  "Install": {
+    "Type": "Flutter",
+    "OEM": false,
+    "Media": "Ubuntu 24.04.2 LTS",
+    "Stages": {
+      "1": "locale",
+      "5": "accessibility",
+      "7": "keyboard",
+      "9": "network",
+      "21": "refresh",
+      "23": "tryOrInstall",
+      "26": "autoinstall",
+      "28": "sourceSelection",
+      "31": "codecsAndDrivers",
+      "68": "storage",
+      "104": "identity",
+      "177": "timezone",
+      "180": "confirm",
+      "184": "install",
+      "-18929": "done"
+    },
+    "Language": "en",
+    "Minimal": false,
+    "RestrictedAddons": false,
+    "PartitionMethod": "manual",
+    "UseActiveDirectory": false
+  }
+}

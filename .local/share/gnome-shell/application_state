@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<application-state>
+  <context id="">
+    <application id="code.desktop" score="36.234375" last-seen="1756122743"/>
+    <application id="telegram-desktop_telegram-desktop.desktop" score="0.00042057852260768414" last-seen="1755762175"/>
+    <application id="firefox_firefox.desktop" score="18732.827306448853" last-seen="1756122752"/>
+    <application id="chromium_chromium.desktop" score="1.15625" last-seen="1756122356"/>
+    <application id="org.gnome.Terminal.desktop" score="2344.2055898120725" last-seen="1756122486"/>
+    <application id="org.gnome.Settings.desktop" score="0.000579833984375" last-seen="1755763202"/>
+  </context>
+</application-state>
